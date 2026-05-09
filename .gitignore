@@ -1,0 +1,10 @@
+bin/
+obj/
+
+.vs/
+.vscode/
+
+app.db
+*.db
+
+.DS_Store
