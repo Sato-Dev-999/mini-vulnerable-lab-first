@@ -16,14 +16,20 @@ public class DatabaseInitializer
                 Username TEXT NOT NULL,
                 Password TEXT NOT NULL
                 );
+
+            CREATE TABLE IF NOT EXISTS Comments (
+                Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                Text TEXT NOT NULL,
+                CreateAt TEXT NOT NULL
+            );
                 
-                DELETE FROM Users;
+            DELETE FROM Users;
                 
-                INSERT INTO Users (Username, Password) VALUES
+            INSERT INTO Users (Username, Password) VALUES
                 ('admin', 'password123'),
                 ('satoshi', 'test123'),
                 ('guest', 'guest');
             ";
-            createCommand.ExecuteNonQuery();
+        createCommand.ExecuteNonQuery();
     }
 }
