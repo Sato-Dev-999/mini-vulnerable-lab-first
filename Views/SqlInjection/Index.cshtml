@@ -1,0 +1,89 @@
+@model SqlInjectionResult
+
+@{
+    ViewData["Title"] = "SQL Injection Lab";
+}
+
+<h1>SQL Injection Lab</h1>
+
+<p>SQLiteを使って、脆弱なSQLと安全なSQLの違いを比較</p>
+
+<hr />
+
+<form method="post">
+    <div>
+        <label>ユーザー名</label>
+        <input type="text" name="username" value="@Model.Username" style="width: 300px;" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>パスワード</label>
+        <input type="password" name="password" value="@Model.Password" style="width: 300px;" />
+    </div>
+
+    <br />
+
+    <button type="submit">ログイン実験</button>
+</form>
+
+<hr />
+
+<h2>実験用アカウント</h2>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>Username</th>
+        <th>Password</th>
+    </tr>
+    <tr>
+        <td>admin</td>
+        <td>password123</td>
+    </tr>
+    <tr>
+        <td>satoshi</td>
+        <td>test123</td>
+    </tr>
+    <tr>
+        <td>guest</td>
+        <td>guest</td>
+    </tr>
+</table>
+
+@if (!string.IsNullOrEmpty(Model.ErrorMessage)){
+    <h2 style="color:red;">エラー</h2>
+    <pre>@Model.ErrorMessage</pre>
+}
+
+@if (!string.IsNullOrEmpty(Model.VulnerableSql)){
+    <hr />
+
+    <h2>脆弱版</h2>
+
+    <h3>生成されたSQL</h3>
+    <pre>@Model.VulnerableSql</pre>
+
+    <h3>結果</h3>
+    @if (Model.VulnerableLoginSuccess){
+        <p style="color:red; font-weight: bold;">ログイン成功</p>
+    }
+    else{
+        <p>ログイン失敗</p>
+    }
+
+    <hr />
+
+    <h2>完全版</h2>
+
+    <h3>実行SQL</h3>
+    <pre>@Model.SafeSql</pre>
+
+    <h3>結果</h3>
+    @if (Model.SafeLoginSuccess){
+        <p style="color: green; font-weight: bold;">ログイン成功</p>
+    }
+    else{
+        <p>ログイン失敗</p>
+    }
+}
