@@ -1,0 +1,53 @@
+@model CommentLabResult
+
+@{
+    ViewData["Title"] = "Stored XSS Lab";
+}
+
+<h1>Stored XSS Lab</h1>
+
+<p>コメントをSQLiteに保存し、脆弱版と安全版で表示</p>
+
+<form method="post">
+    <div>
+        <label>コメント</label><br />
+        <textarea name="commentText" rows="5" cols="60">@Model.CommentText</textarea>
+    </div>
+
+    <br />
+
+    <button type="submit">投稿</button>
+</form>
+
+<hr />
+
+<h2>投稿済みコメント</h2>
+
+@if (Model.Comments.Count == 0){
+    <p>コメントはまだありません</p>
+}
+else{
+    <h3>脆弱版一覧</h3>
+    <p>Html.RawでDBの内容をそのまま表示します。</p>
+
+    <div style="border: 1px solid red; padding: 10px;">
+        @foreach (var comment in Model.Comments){
+            <div style="border-bootom: 1px solid #ccc; margin-bottom: 10px;">
+                <small>@comment.CreateAt</small><br />
+                @Html.Raw(comment.Text)
+            </div>
+        }
+    </div>
+
+    <h3>安全版一覧</h3>
+    <P>Razor通常出力でHTMLエスケープして表示します。</P>
+
+    <div style="border: 1px solid green; padding: 10px;">
+        @foreach (var comment in Model.Comments){
+            <div style="border-bottom: 1px solid #ccc; margin-bottom: 10px;">
+                <small>@comment.CreateAt</small><br />
+                @comment.Text
+            </div>
+        }
+    </div>
+}
