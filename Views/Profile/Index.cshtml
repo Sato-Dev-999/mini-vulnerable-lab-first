@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<h1>プロフィール</h1>
+
+<p>現在の表示名：@ViewBag.DisplayName</p>
+
+<hr />
+
+<h3>GETで表示名変更</h3>
+<a asp-controller="Profile" asp-action="ChangeNameByGet" asp-route-displayName="GETで通常変更" method="get">GETで変更する</a>
+
+<hr />
+
+<h3>POSTで表示名変更</h3>
+
+<form asp-controller="Profile" asp-action="ChangeNameByPost">
+    <input type="text" name="displayName" placeholder="POSTで新しい表示名" />
+    <button type="submit">POSTで変更</button>
+</form>
