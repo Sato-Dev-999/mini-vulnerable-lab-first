@@ -1,0 +1,25 @@
+@{
+    ViewData["Title"] = "Open Redirect Demo";
+}
+
+<h2>オープンリダイレクト実験：ログイン画面</h2>
+
+@if (ViewBag.Error != null){
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+<form asp-controller="OpenRedirect" asp-action="Login" method="post">
+    <input type="hidden" name="returnUrl" value="@ViewBag.ReturnUrl" />
+
+    <div>
+        <label>ユーザー名</label>
+        <input type="text" name="userName" value="satoshi" />
+    </div>
+
+    <div>
+        <label>パスワード</label>
+        <input type="hidden" name=password value="password" />
+    </div>
+
+    <button type=submit>ログイン</button>
+</form>
