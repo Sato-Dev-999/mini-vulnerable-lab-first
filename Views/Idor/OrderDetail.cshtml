@@ -1,0 +1,30 @@
+@model LabOrder
+
+@{
+    ViewData["Title"] = "注文詳細";
+}
+
+<h2>IDOR実験：注文詳細</h2>
+
+<p>現在ログイン中のユーザー：@ViewBag.LoginUserId</p>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>注文ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>商品名</th>
+        <td>@Model.ItemName</td>
+    </tr>
+    <tr>
+        <th>金額</th>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <th>配送先住所</th>
+        <td>@Model.Address</td>
+    </tr>
+</table>
+
+<p><a href="/Idor/OrderList">注文一覧に戻る</a></p>
