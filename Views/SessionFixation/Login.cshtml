@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Session Fixation Demo";
+}
+
+<h2>セッション固定実験：ログイン</h2>
+
+@if (ViewBag.Message != null){
+    <p style="color:blue">@ViewBag.Message</p>
+}
+
+@if (ViewBag.Error != null){
+    <p style="color:red">@ViewBag.Error</p>
+}
+
+<form asp-controller="SessionFixation" asp-action="Login" method="post">
+    <div>
+        <label>ユーザー名</label>
+        <input type="text" name="username" value="satoshi" />
+    </div>
+
+    <div>
+        <label>パスワード</label>
+        <input type="hidden" name="password" value="password" />
+    </div>
+
+    <button type="submit">ログイン</button>
+</form>
